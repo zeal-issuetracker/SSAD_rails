@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  createdby: 1
+  assignee: 1
+  votes: 1
+  milestone: MyText
+  status: MyString
+  description: MyText
+  setting: false
+  project_id: 
+
+two:
+  title: MyText
+  createdby: 1
+  assignee: 1
+  votes: 1
+  milestone: MyText
+  status: MyString
+  description: MyText
+  setting: false
+  project_id: 
