@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
   get 'session/new'
   get 'projects/members'
-  resources :issues
-  resources :projects
+  resources :issues do
+    collection do
+      get 'assign'
+      post 'assign_other'
+    end
+  end
+  resources :projects do
+    collection do
+      post 'members'
+    end
+  end
+
   resources :users
   resources :sessions
 

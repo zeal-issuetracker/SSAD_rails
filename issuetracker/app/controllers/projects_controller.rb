@@ -73,7 +73,10 @@ class ProjectsController < ApplicationController
   end
 
   def members
-   @member = params[:member]
+   @member = Project.find(params[:p_id])
+   @member.update_attribute(:members,params[:member])
+   redirect_to :back
+
   end
 
   private

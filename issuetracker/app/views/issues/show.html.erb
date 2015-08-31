@@ -41,9 +41,25 @@
 </p>
 
 <p>
-  <strong>Project:</strong>
-  <%= @issue.project %>
+  <strong>Project ID:</strong>
+  <%= @issue.project_id %>
 </p>
 
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>
+
+
+
+<%= link_to 'assign to yourself' , {:controller => "issues" , :action => "assign"  ,:iss=>@issue }%>
+
+
+<%= form_tag( :action => "assign_other") do %>
+<p> enter other's ID : 
+<%= text_field_tag("user_id") %>
+</p>
+<p>
+<%=hidden_field_tag("iss",  @issue.id)%>
+</p>
+
+<%= submit_tag("assign to member") %>
+<% end %>

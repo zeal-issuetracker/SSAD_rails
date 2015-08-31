@@ -34,8 +34,11 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :setting %><br>
-    <%= f.check_box :setting %>
+    <%= f.label :settings %><br/>
+    <%=f.label :setting , "private" , :value =>1 %>
+    <%=f.radio_button :setting , true %>
+    <%=f.label :setting , "public" , :value => 0 %>
+    <%= f.radio_button :setting ,false ,:checked=>true   %>
   </div>
 
   <div class="field">

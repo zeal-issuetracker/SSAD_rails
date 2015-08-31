@@ -11,7 +11,7 @@ class Issue < ActiveRecord::Base
 
 	validates :status , :presence => true
 
-	validates :setting , :presence => true
+	#validates :setting , :presence => true
 
 
 end

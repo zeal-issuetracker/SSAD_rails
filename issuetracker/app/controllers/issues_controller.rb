@@ -15,6 +15,7 @@ class IssuesController < ApplicationController
   # GET /issues/new
   def new
     @issue = Issue.new
+    @issue.project_id=params[:pro_id]
   end
 
   # GET /issues/1/edit
@@ -31,11 +32,13 @@ class IssuesController < ApplicationController
       redirect_to :controller => "welcome" , :action => "index"
       return
     else
-      @issue = Issue.new(project_params)
+      @issue = Issue.new(issue_params)
       @issue.createdby=@current_user.id
     end
 
-    @issue = Issue.new(issue_params)
+
+
+#    @issue = Issue.new(issue_params)
 
 
     respond_to do |format|
@@ -72,6 +75,35 @@ class IssuesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def assign
+    p= current_user
+    if p == 0
+      flash[:notice] = "Please login ..."
+      redirect_to :controller => "welcome" , :action => "index"
+      return
+    else
+      @issue=Issue.find(params[:iss])
+      @issue.update_attribute(:assignee,p)
+      redirect_to :back
+
+      #par.assignee=@current_user.id
+    end
+  end
+
+  def assign_other
+    p=current_user
+    if p==0
+      flash[:notice] = "Please login ..."
+      redirect_to :controller => "welcome" , :action => "index"
+      return
+    else
+      @issue=Issue.find(params[:iss])
+      @issue.update_attribute(:assignee,params[:user_id])
+      redirect_to :back
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
