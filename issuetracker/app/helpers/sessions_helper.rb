@@ -12,6 +12,11 @@ module SessionsHelper
 	 #getter method
 	def current_user
 	 	@current_user||=User.find(session[:user_id]) if session[:user_id]
+	 	if @current_user.nil?
+	 		return 0
+	 	else
+	 		return @current_user.id
+	 	end
 	end
 
 	 #setter method

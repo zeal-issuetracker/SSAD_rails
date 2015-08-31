@@ -24,7 +24,19 @@ class IssuesController < ApplicationController
   # POST /issues
   # POST /issues.json
   def create
+
+    p= current_user
+    if p == 0
+      flash[:notice] = "Please login ..."
+      redirect_to :controller => "welcome" , :action => "index"
+      return
+    else
+      @issue = Issue.new(project_params)
+      @issue.createdby=@current_user.id
+    end
+
     @issue = Issue.new(issue_params)
+
 
     respond_to do |format|
       if @issue.save

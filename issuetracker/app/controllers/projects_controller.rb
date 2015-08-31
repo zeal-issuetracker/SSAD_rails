@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+
+  include SessionsHelper
+  before_action :set_project, only: [:show, :edit, :update, :destroy ]
 
   # GET /projects
   # GET /projects.json
@@ -24,7 +26,16 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    p= current_user
+    if p == 0
+      flash[:notice] = "Please login ..."
+      redirect_to :controller => "welcome" , :action => "index"
+      return
+    else
+      @project = Project.new(project_params)
+      @project.owner=@current_user.id
+
+    end
 
     respond_to do |format|
       if @project.save
@@ -61,6 +72,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def members
+   @member = params[:member]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -71,4 +86,7 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :description, :owner, :members)
     end
+
+
 end
+

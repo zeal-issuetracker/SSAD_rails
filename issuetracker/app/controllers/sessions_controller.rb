@@ -17,9 +17,8 @@ class SessionsController < ApplicationController
 
   end
 
-  def destroy
+  def show ##destroy for sign out
   	sign_out
-  	redirect_to sign_in_path
-
+  	redirect_to :controller => 'welcome' , :action => 'index'
   end
 end

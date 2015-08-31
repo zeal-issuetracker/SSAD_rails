@@ -20,5 +20,20 @@
   <%= @project.members %>
 </p>
 
+<p>
+	<strong>Settings:</strong>
+	<%= @project.setting %>
+</p>
+
+
+<%= form_tag( :action => "members") do %>
+<p> Member ID : 
+<%= text_field_tag("member") %>
+</p>
+
+<%= submit_tag("add member") %>
+<% end %>
+<%= @member %>
+
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
