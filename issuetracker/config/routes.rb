@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
+  post 'upvote/create'
+
+  get 'upvote/destroy'
+
   get 'session/new'
-  get 'projects/members'
-  resources :issues do
+  #get 'projects/members'
+  resources :issues do 
+    #member do
+    #  put 'like' , to: "issues#upvote"
+    #  put "dislike" , to: "issues#downvote"
+    #end  
+    resources :upvotes , only: [:create , :destroy] 
     collection do
       get 'assign'
       post 'assign_other'

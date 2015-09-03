@@ -1,6 +1,5 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
-
   # GET /issues
   # GET /issues.json
   def index
@@ -103,6 +102,24 @@ class IssuesController < ApplicationController
       redirect_to :back
     end
   end
+
+  #def upvote
+  #  p=current_user
+  #  @issue = Issue.find(params[:id])
+  #  if p!=0
+  #    @issue.upvote_by p
+  #    redirect_to issues_path
+  #  end
+  #end
+
+  #def downvote
+  #  p=current_user
+  #  @issue = Issue.find(params[:id])
+  #  if p!=0
+  #    @issue.downvote_by p
+  #    redirect_to issues_path
+  #  end
+  #end
 
 
   private

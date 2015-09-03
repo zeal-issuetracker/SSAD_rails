@@ -46,8 +46,14 @@
 </p>
 
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
-<%= link_to 'Back', issues_path %>
+<%= link_to 'Back', issues_path %><br/>
 
+
+
+<%= form_tag(:controller => "upvote" , :action => "create", :id => @issue.id) do %>
+  <%= hidden_field_tag("user", current_user)%>
+  <%= submit_tag("upvote") %>
+<% end %>
 
 
 <%= link_to 'assign to yourself' , {:controller => "issues" , :action => "assign"  ,:iss=>@issue }%>
