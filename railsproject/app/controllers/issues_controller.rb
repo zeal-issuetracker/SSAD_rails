@@ -1,8 +1,10 @@
 class IssuesController < ApplicationController
-  before_action :set_issue, only: [:show, :edit, :update, :destroy]
+  before_action :set_issue, only: [:show, :edit, :update, :destroy ,:upvote , :downvote]
   before_action :authenticate_user! , except: [:index,:show]
   # GET /issues
   # GET /issues.json
+
+
   def index
     @issues = Issue.all
   end
@@ -62,6 +64,16 @@ class IssuesController < ApplicationController
       format.html { redirect_to issues_url, notice: 'Issue was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def upvote
+    @issue.upvote_by current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @issue.downvote_by current_user
+    redirect_to :back
   end
 
   private

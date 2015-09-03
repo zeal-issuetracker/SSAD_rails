@@ -1,4 +1,5 @@
 class Issue < ActiveRecord::Base
+	acts_as_votable
 	belongs_to :user
 	belongs_to :proj
 	has_many :comments

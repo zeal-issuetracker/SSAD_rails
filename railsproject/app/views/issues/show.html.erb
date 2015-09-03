@@ -47,6 +47,12 @@
   <strong>name:</strong>
   <%= @issue.user.name %>
 </p>
+<p> 
+<%= @issue.get_upvotes.size %> Upvotes</p>
+<p> <%= @issue.get_downvotes.size %> Downvotes</p>
+
+<%= link_to "Upvote",like_issue_path(@issue), method: :get %>
+<%= link_to "Downvote",dislike_issue_path(@issue), method: :get %>
 
 <h2><%= pluralize(@issue.comments.count,"Comment") %></h2>
 <% @comments.each do |comment| %>

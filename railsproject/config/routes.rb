@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :issues do
+    member do
+      get "like" , to: "issues#upvote"
+      get "dislike" , to: "issues#downvote"
+    end
     resources :comments
+
   end
   resources :projs
   devise_for :users
