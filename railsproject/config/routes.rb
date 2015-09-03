@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :issues
   resources :projs
   devise_for :users
   get 'welcome/index'

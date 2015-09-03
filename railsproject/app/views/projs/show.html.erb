@@ -27,3 +27,4 @@
 
 <%= link_to 'Edit', edit_proj_path(@proj) %> |
 <%= link_to 'Back', projs_path %>
+<%= link_to 'add issue',{:controller => "issues" , :action => "new", :pro_id => @proj.id  } %>
