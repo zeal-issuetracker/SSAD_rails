@@ -1,7 +1,7 @@
 class Issue < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :proj
-
+	has_many :comments
 	validates :title , :presence => true ,
 				:length => { :maximum => 100 }
 

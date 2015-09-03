@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_many :projs
   has_many :issues
+  has_many :comments
 end

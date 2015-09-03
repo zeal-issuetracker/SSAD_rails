@@ -43,6 +43,19 @@
   <strong>project:</strong>
   <%= @issue.proj_id %>
 </p>
+<p>
+  <strong>name:</strong>
+  <%= @issue.user.name %>
+</p>
+
+<h2><%= pluralize(@issue.comments.count,"Comment") %></h2>
+<% @comments.each do |comment| %>
+  <p> <%=comment.user.name %> </p>
+  <p> <%=comment.content %> </p>
+
+<% end %>
+
+<%=render 'comments/form' %>
 
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>
