@@ -1,6 +1,10 @@
+
 <h1>Editing Proj</h1>
 
 <%= render 'form' %>
+<% if flash[:notice] %>
+<strong><%= flash[:notice]%>
+</strong><% end%>
 
-<%= link_to 'Show', @proj %> |
+<%= link_to 'Show', @proj %> 
 <%= link_to 'Back', projs_path %>

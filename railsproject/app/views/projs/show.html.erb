@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -11,7 +12,7 @@
 </p>
 
 <p>
-  <strong>Owner:</strong>
+  <strong>Owner_id:</strong>
   <%= @proj.owner %>
 </p>
 
@@ -22,9 +23,13 @@
 
 <p>
   <strong>Members:</strong>
-  <%= @proj.members %>
+  <%= @proj.users.each do |e| %>
+    <%= e.email %>
+    <% end%>
 </p>
 
-<%= link_to 'Edit', edit_proj_path(@proj) %> |
+ <% if @proj.owner==current_user.id %>
+    <%= link_to 'Edit', edit_proj_path(@proj) %> 
+  <% end%>
 <%= link_to 'Back', projs_path %>
 <%= link_to 'add issue',{:controller => "issues" , :action => "new", :pro_id => @proj.id  } %>

@@ -1,3 +1,4 @@
+
 <%= form_for(@proj) do |f| %>
   <% if @proj.errors.any? %>
     <div id="error_explanation">
@@ -27,10 +28,28 @@
     <%=f.label :settings , "public" , :value => 0 %>
     <%= f.radio_button :settings ,false ,:checked=>true   %> 
   </div>
-  <div class="field">
-    <%= f.label :members %><br>
-    <%= f.text_area :members %>
+ 
+
+    <p>Set the option as "None" if you dont want to add/remove an organization</p>
+
+
+   <div class="field">
+    <%= f.label :Add_Members %><br>
+    <%= select_tag "add_user",
+    options_from_collection_for_select(User.all,'id',
+    'email', @proj.users.map{|j|j.id}),  :multiple => true ,include_blank: "None" %>
+  
   </div>
+
+  <div class="field">
+      <%= f.label :Remove_Members %><br>
+
+      <%= select_tag "remove_user",
+      options_from_collection_for_select(User.all,'id',
+    'email', @proj.users.map{|j|j.id}),  :multiple => true ,
+    include_blank: "None" %>
+  </div>
+
 
   <div class="actions">
     <%= f.submit %>

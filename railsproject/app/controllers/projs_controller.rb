@@ -26,6 +26,12 @@ class ProjsController < ApplicationController
   def create
     @proj = current_user.projs.build(proj_params)
 
+# @proj.owner =current_user.id assigns current user as the owner of the project being created
+
+    @proj.owner=current_user.id
+    @users = User.where(:id => params[:add_user])
+
+    @proj.users << @users
     respond_to do |format|
       if @proj.save
         format.html { redirect_to @proj, notice: 'Proj was successfully created.' }
@@ -35,11 +41,38 @@ class ProjsController < ApplicationController
         format.json { render json: @proj.errors, status: :unprocessable_entity }
       end
     end
+
+       rescue ActiveRecord::RecordNotUnique
+
+    #    puts "INVALID"
+        flash[:notice]='User already a member'
+
+        redirect_to(:back)
+
   end
 
   # PATCH/PUT /projs/1
   # PATCH/PUT /projs/1.json
   def update
+
+
+     @proj = Proj.find(params[:id])
+
+      if @proj.owner==current_user.id
+        if(params[:add_user]) !=nil
+          @users = User.where(:id => params[:add_user])
+          @proj.users << @users
+        end
+      end
+
+      if @proj.owner==current_user.id 
+        if(params[:remove_user])!=nil
+          remove_member = @proj.users.find(params[:remove_user])
+          @proj.users.delete(remove_member)
+        end
+      end
+
+
     respond_to do |format|
       if @proj.update(proj_params)
         format.html { redirect_to @proj, notice: 'Proj was successfully updated.' }
@@ -49,6 +82,17 @@ class ProjsController < ApplicationController
         format.json { render json: @proj.errors, status: :unprocessable_entity }
       end
     end
+
+     rescue ActiveRecord::RecordNotUnique
+        
+        flash[:notice]='User already a member'
+         redirect_to(:back)
+         
+    rescue ActiveRecord::RecordNotFound
+
+      flash[:notice]='User not a member'
+      redirect_to(:back)
+
   end
 
   # DELETE /projs/1
